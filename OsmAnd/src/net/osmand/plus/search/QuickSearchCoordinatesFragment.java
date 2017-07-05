@@ -121,6 +121,11 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		currentFormat = app.getSettings().COORDINATES_FORMAT.get();
 
 		latEdit = ((EditText) view.findViewById(R.id.latitudeEditText));
+		if (currentFormat == PointDescription.FORMAT_DEGREES || currentFormat == PointDescription.UTM_FORMAT) {
+			latEdit.setInputType(android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL | android.text.InputType.TYPE_NUMBER_FLAG_SIGNED);
+		} else {
+			latEdit.setInputType(android.text.InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS | android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+		}
 		lonEdit = ((EditText) view.findViewById(R.id.longitudeEditText));
 		northingEdit = ((EditText) view.findViewById(R.id.northingEditText));
 		eastingEdit = ((EditText) view.findViewById(R.id.eastingEditText));
@@ -509,6 +514,11 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 			currentFormat = format;
 			formatEdit.setText(PointDescription.formatToHumanString(getMyApplication(), currentFormat));
 			final EditText latEdit = ((EditText) view.findViewById(R.id.latitudeEditText));
+			if (currentFormat == PointDescription.FORMAT_DEGREES || currentFormat == PointDescription.UTM_FORMAT) {
+				latEdit.setInputType(android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL | android.text.InputType.TYPE_NUMBER_FLAG_SIGNED);
+			} else {
+				latEdit.setInputType(android.text.InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS | android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+			}
 			final EditText lonEdit = ((EditText) view.findViewById(R.id.longitudeEditText));
 			updateControlsVisibility();
 			if (currentFormat == PointDescription.UTM_FORMAT) {
